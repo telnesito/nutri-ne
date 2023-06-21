@@ -1,6 +1,7 @@
-import { Box, Card, CardContent, Divider, TextField, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, Divider, TextField, Typography } from "@mui/material"
 import { RecipeContext } from "../context/RecipeContexProvidert"
 import { useContext, useState } from "react"
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const Recipes = () => {
 
   // label: '',
@@ -13,9 +14,8 @@ const Recipes = () => {
   // url: ''
   const { recipe, _ } = useContext(RecipeContext)
 
-  const [porciones, setPorciones] = useState(recipe.recipeYield)
+  const [porciones, setPorciones] = useState(1)
 
-  console.log(recipe.recipeYield)
   return (
     <Box
       width={'25vw'}
@@ -40,7 +40,7 @@ const Recipes = () => {
             paddingLeft={'14px'}
 
             color={'black'}>
-            Detalles
+            Nombre de receta
           </Typography>
 
           <Typography
@@ -67,6 +67,47 @@ const Recipes = () => {
 
           >{recipe.mealType}</Typography>
         </Box>
+
+        {recipe.cautions.length > 0 ?
+
+          <Box
+
+          >
+            <Typography
+              fontWeight={'700'}
+              variant="body1"
+              paddingLeft={'14px'}
+
+              color={'black'}>Precaucion</Typography>
+
+
+            <Box display={'flex'}
+              gap={'10px'}
+              flexWrap={'wrap'}
+              alignItems={'center'}
+              color={'white'}
+              paddingLeft={'14px'}
+            >
+              {recipe.cautions.map((el, index) =>
+
+                <Typography
+                  boxShadow={'4px 4px 10px #00000050'}
+                  width={'auto'}
+                  padding={'5px'}
+                  borderRadius={'10px'}
+                  bgcolor={'red'}
+                  key={index}
+                  variant="body2"
+                  textAlign={'center'}
+
+
+                >{el}</Typography>
+              )}
+            </Box>
+          </Box>
+          : null
+        }
+
         <Box
           paddingLeft={'14px'}
         >
@@ -127,13 +168,43 @@ const Recipes = () => {
           </Box>
           <Divider />
 
-          <Box>
-            {recipe.digest && recipe.digest.map(({ label, total, unit }, index) => <Box
-              display={'flex'}
-              color={'black'} key={index}>
-              <Typography>{label}</Typography>
-            </Box>)}
-          </Box>
+          <Accordion
+
+            sx={{
+              width: '95%',
+              mt: '10px',
+              bgcolor: '#660033',
+              color: 'white'
+            }}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon color="secondary" />}
+            >
+              Nutrientes
+            </AccordionSummary>
+
+            <AccordionDetails>
+
+              <Box
+                display={'flex'}
+
+                flexWrap={'wrap'}
+                gap={'20px'}
+              >
+                {recipe.digest && recipe.digest.map(({ tag, total, unit }, index) => <Box
+                  color={'white'}
+                  display={'flex'}
+                  width={'45%'}
+                  key={index}>
+
+                  <Typography width={'125px'}>{tag}</Typography>
+                  <Typography >{Math.floor(total / porciones)}</Typography>
+                  <Typography >{unit}</Typography>
+
+                </Box>)}
+              </Box>
+            </AccordionDetails>
+          </Accordion>
         </Box>
 
 

@@ -1,8 +1,9 @@
-import { Box, Button, Paper, TextField, Typography } from '@mui/material'
+import { Box, Button, InputAdornment, Paper, TextField, Typography } from '@mui/material'
 import { useState, useContext } from 'react'
 import useFecth from '../customHooks/useFecth'
 import Loading from './Loading'
 import { RecipeContext } from '../context/RecipeContexProvidert'
+import { AccountCircle, Search } from '@mui/icons-material'
 
 
 
@@ -74,7 +75,17 @@ const Home = () => {
 
 
         >
+
+
+
           <TextField
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              ),
+            }}
             required
             sx={{
               width: '70%',
@@ -258,7 +269,7 @@ const Home = () => {
               </Box>
 
             </Paper>)
-              : <Typography color={'black'}>Nada que mostrar</Typography>
+              : <img src='/img/look.svg'></img>
           }
         </Box>
         <Loading isLoading={isLoading} />
