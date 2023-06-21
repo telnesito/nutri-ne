@@ -1,7 +1,9 @@
 import { Box, Button, Paper, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import useFecth from '../customHooks/useFecth'
 import Loading from './Loading'
+import { RecipeContext } from '../context/RecipeContexProvidert'
+
 
 
 const Home = () => {
@@ -9,7 +11,7 @@ const Home = () => {
 
 
   const [busqueda, setBusqueda] = useState('')
-  const [ingredientes, setIngredientes] = useState([])
+  const { _, setRecipe } = useContext(RecipeContext)
 
   const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${busqueda}&app_id=65a5d4c3&app_key=256f9f1b299cddd6880c5d42d477ecac`
   const { data, isLoading, error, fetchData } = useFecth(url)
@@ -17,12 +19,21 @@ const Home = () => {
   const onSubmit = async (e) => {
 
     e.preventDefault()
-    await fetchData()
-    console.log(data)
+    try {
 
+      await fetchData()
+      console.log(data)
 
+      if (error) {
+        throw new Error(error)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-
+  const showIngredients = (recipe) => {
+    setRecipe(recipe)
   }
 
   return (
@@ -89,7 +100,7 @@ const Home = () => {
           height={'auto'}
         >
           {
-            data ? data.hits.map(({ recipe: { label, image, healthLabels, yield: recipeYield, calories, totalNutrients } }, index) => <Paper
+            data ? data.hits.map(({ recipe: { label, image, healthLabels, yield: recipeYield, calories, totalNutrients, mealType, ingredients, digest, dietLabels, cautions, url } }, index) => <Paper
 
 
               sx={{
@@ -133,7 +144,16 @@ const Home = () => {
                   height={'90%'}
                   gap={'10px'}
                 >
-                  <Typography variant='body1' color={'black'}>{label}</Typography>
+                  <Typography
+                    onClick={() => showIngredients({ label, image, mealType, ingredients, digest, dietLabels, cautions, url, calories, recipeYield })}
+                    sx={{
+                      '&:hover': {
+                        textDecoration: 'underline',
+                        cursor: 'pointer',
+                      }
+                    }}
+
+                    variant='body1' color={'black'}>{label}</Typography>
 
                   <Box
                     display={'flex'}
