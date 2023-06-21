@@ -27,13 +27,12 @@ const Home = () => {
 
   return (
     <Box
-      width={'100vw'}
-      minHeight={'100vh'}
-      bgcolor={'white'}
+      width={'45vw'}
+
       display={'flex'}
       flexDirection={'column'}
       alignItems={'center'}
-      height={'auto'}
+      height={'100vh'}
 
     >
 
@@ -43,10 +42,14 @@ const Home = () => {
         display={'flex'}
         flexDirection={'column'}
         alignItems={'center'}
-        height={'70%'}
-        width={'70%'}
+        height={'100%'}
+        width={'80%'}
         gap={'10px'}
         padding={'20px'}
+        sx={{
+          overflowY: 'auto',
+          overflowX: 'hidden'
+        }}
 
 
       >
@@ -58,12 +61,13 @@ const Home = () => {
           gap={'10px'}
 
 
+
         >
           <TextField
             required
             sx={{
-              width: '60%',
-              minWidth: '400px'
+              width: '70%',
+              minWidth: '450px'
 
             }}
             onChange={({ target }) => setBusqueda(target.value)}
@@ -71,8 +75,8 @@ const Home = () => {
             label='Ingrese ingredientes' focused placeholder='Que comeremos hoy?' type='search' variant='filled' />
 
           <Button sx={{
-            width: '60%',
-            minWidth: '400px'
+            width: '70%',
+            minWidth: '450px'
 
           }} variant='contained' type='submit' >Buscar</Button>
         </Box>
@@ -80,8 +84,8 @@ const Home = () => {
           display={'flex'}
           flexDirection={'column'}
           gap={'20px'}
-          width={'60%'}
-          minWidth={'400px'}
+          width={'70%'}
+          minWidth={'450px'}
           height={'auto'}
         >
           {
@@ -152,6 +156,7 @@ const Home = () => {
                 bgcolor={'#00000030'}
                 display={'flex'}
                 justifyContent={'center'}
+                borderRadius={'5px'}
                 alignItems={'center'}
               >
                 <Box
@@ -233,7 +238,7 @@ const Home = () => {
               </Box>
 
             </Paper>)
-              : "Nada"
+              : <Typography color={'black'}>Nada que mostrar</Typography>
           }
         </Box>
         <Loading isLoading={isLoading} />
@@ -242,4 +247,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export { Home }
