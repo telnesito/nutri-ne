@@ -20,7 +20,6 @@ const Filters = () => {
 
   const { filter, setFilter } = useContext(FilterContext)
 
-  console.log(filter)
 
   return (
     <Box
@@ -53,7 +52,7 @@ const Filters = () => {
 
         <TextField
 
-          onChange={({ target }) => setFilter({ maxCalories: target.value })}
+          onChange={({ target }) => setFilter({ ...filter, maxCalories: target.value })}
 
           autoComplete={'off'}
 
@@ -70,7 +69,7 @@ const Filters = () => {
         >Rango de cantidad de ingredientes</Typography>
 
         <TextField
-          onChange={({ target }) => setFilter({ maxIngredients: target.value })}
+          onChange={({ target }) => setFilter({ ...filter, maxIngredients: target.value })}
           autoComplete={'off'}
           helperText={'El rango se ingresa de la siguiente forma min-max, p.e: 2-4'}
           fullWidth
