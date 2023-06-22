@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 
 const useFecth = (url) => {
   const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [isEmpty, setIsEmpty] = useState(false)
 
   const fetchData = async () => {
     setIsLoading(true)
@@ -25,6 +26,11 @@ const useFecth = (url) => {
 
       const responseData = await response.json()
       setData(responseData)
+      if (responseData.count === 0) {
+        setIsEmpty(true)
+      } else {
+        setIsEmpty(false)
+      }
       setIsLoading(false)
 
     } catch (error) {
@@ -38,7 +44,7 @@ const useFecth = (url) => {
 
 
 
-  return { data, isLoading, error, fetchData }
+  return { data, isLoading, error, fetchData, isEmpty }
 }
 
 export default useFecth

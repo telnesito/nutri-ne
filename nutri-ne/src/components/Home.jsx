@@ -15,7 +15,7 @@ const Home = () => {
   const { _, setRecipe } = useContext(RecipeContext)
 
   const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${busqueda}&app_id=65a5d4c3&app_key=256f9f1b299cddd6880c5d42d477ecac`
-  const { data, isLoading, error, fetchData } = useFecth(url)
+  const { data, isLoading, error, fetchData, isEmpty } = useFecth(url)
 
   const onSubmit = async (e) => {
 
@@ -87,6 +87,7 @@ const Home = () => {
               ),
             }}
             required
+            helperText={'Puedes separar los ingredientes por comas (","), p.e : Tomato, onions'}
             sx={{
               width: '70%',
               minWidth: '450px'
@@ -94,7 +95,7 @@ const Home = () => {
             }}
             onChange={({ target }) => setBusqueda(target.value)}
 
-            label='Ingrese ingredientes' focused placeholder='Que comeremos hoy?' type='search' variant='filled' />
+            label='Ingrese ingredientes' focused placeholder='¿Qué comeremos hoy?' type='search' variant='filled' />
 
           <Button sx={{
             width: '70%',
@@ -111,7 +112,7 @@ const Home = () => {
           height={'auto'}
         >
           {
-            data ? data.hits.map(({ recipe: { label, image, healthLabels, yield: recipeYield, calories, totalNutrients, mealType, ingredients, digest, dietLabels, cautions, url } }, index) => <Paper
+            data && !isEmpty ? data.hits.map(({ recipe: { label, image, healthLabels, yield: recipeYield, calories, totalNutrients, mealType, ingredients, digest, dietLabels, cautions, url } }, index) => <Paper
 
 
               sx={{

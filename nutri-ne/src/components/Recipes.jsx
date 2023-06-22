@@ -4,14 +4,7 @@ import { useContext, useState } from "react"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const Recipes = () => {
 
-  // label: '',
-  // image: '',
-  // mealType: '',
-  // ingredients: '',
-  // digest: '',
-  // dietLabels: '',
-  // cautions: '',
-  // url: ''
+
   const { recipe, _ } = useContext(RecipeContext)
 
   const [porciones, setPorciones] = useState(1)
@@ -173,7 +166,7 @@ const Recipes = () => {
             sx={{
               width: '95%',
               mt: '10px',
-              bgcolor: '#660033',
+              bgcolor: '#df5159 ',
               color: 'white'
             }}
           >

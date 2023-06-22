@@ -1,9 +1,8 @@
-import { CheckBox } from "@mui/icons-material"
-import { Box, Button, Checkbox, FormControl, FormControlLabel, FormGroup, Paper, TextField, Typography } from "@mui/material"
+import { Box, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material"
 
 const Filters = () => {
 
-  const alergias = ["Gluten", "Pez", "Lacteos", "Mariscos", "Trigo", "Soja", "Huevos", "Nueces"]
+  const alergias = ["Gluten", "Pez", "Lácteos", "Mariscos", "Trigo", "Soja", "Huevos", "Nueces"]
   const dietas = ["Vegetariano",
     "Vegano",
     "Paleo",
@@ -12,7 +11,7 @@ const Filters = () => {
     "Bajo-carbo",
     "Bajo-grasas",
     "Bajo-sodio",
-    "Bajo-azucar",
+    "Bajo-azúcar",
     "Sin alcohol",
     "Balanceada",
     "Inmunidad"]
@@ -34,7 +33,7 @@ const Filters = () => {
       <Typography
         variant="body1"
         fontWeight={'700'}
-        color={'black'}>Filtros de busqueda</Typography>
+        color={'black'}>Filtros de búsqueda</Typography>
 
       <Box
         display={'flex'}
@@ -43,9 +42,10 @@ const Filters = () => {
       >
         <Typography
           variant="body2"
+          fontWeight={'700'}
 
           color={'black'}
-        >Maximas calorias</Typography>
+        >Calorías máximas</Typography>
 
         <TextField
           autoComplete={'off'}
@@ -57,6 +57,7 @@ const Filters = () => {
 
         <Typography
           variant="body2"
+          fontWeight={'700'}
 
           color={'black'}
         >Rango de cantidad de ingredientes</Typography>
@@ -71,6 +72,7 @@ const Filters = () => {
 
         <Typography
           variant="body2"
+          fontWeight={'700'}
 
           color={'black'}
         >Alergias</Typography>
@@ -85,6 +87,7 @@ const Filters = () => {
         </Box>
         <Typography
           variant="body2"
+          fontWeight={'700'}
 
           color={'black'}
         >Dietas</Typography>
