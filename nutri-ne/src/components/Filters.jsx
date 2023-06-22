@@ -1,5 +1,5 @@
 import { Box, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material"
-
+import { useState } from "react"
 const Filters = () => {
 
   const alergias = ["Gluten", "Pez", "Lácteos", "Mariscos", "Trigo", "Soja", "Huevos", "Nueces"]
@@ -16,6 +16,9 @@ const Filters = () => {
     "Balanceada",
     "Inmunidad"]
 
+  const [maxCalories, setMaxCalories] = useState(null)
+
+  console.log(maxCalories)
 
 
   return (
@@ -48,6 +51,9 @@ const Filters = () => {
         >Calorías máximas</Typography>
 
         <TextField
+
+          onChange={({ target }) => setMaxCalories(target.value)}
+
           autoComplete={'off'}
 
           fullWidth
