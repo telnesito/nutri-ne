@@ -5,7 +5,7 @@ import Loading from './Loading'
 import { RecipeContext } from '../context/RecipeContexProvidert'
 import { Search } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-
+import { FilterContext } from '../context/FilterContextProvider'
 
 
 const Home = () => {
@@ -15,9 +15,24 @@ const Home = () => {
   const [busqueda, setBusqueda] = useState('')
   const navigate = useNavigate()
   const { _, setRecipe } = useContext(RecipeContext)
+  const { filter, setFilter } = useContext(FilterContext)
 
-  const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${busqueda}&app_id=65a5d4c3&app_key=256f9f1b299cddd6880c5d42d477ecac`
-  const { data, isLoading, error, fetchData, isEmpty } = useFecth(url)
+
+  const createUrl = () => {
+    let urlBase = `https://api.edamam.com/api/recipes/v2?type=public&q=${busqueda}&app_id=65a5d4c3&app_key=256f9f1b299cddd6880c5d42d477ecac`
+    if (filter.maxCalories) {
+      urlBase += `&calories=${filter.maxCalories}`
+    }
+
+    if (filter.maxIngredients) {
+      urlBase += `&ingr=${filter.maxIngredients}`
+    }
+
+    console.log(urlBase)
+    return urlBase
+  }
+
+  const { data, isLoading, error, fetchData, isEmpty } = useFecth(createUrl())
 
   const onSubmit = async (e) => {
 
