@@ -1,12 +1,14 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, Divider, TextField, Typography } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, Divider, IconButton, TextField, Typography } from "@mui/material"
 import { RecipeContext } from "../context/RecipeContexProvidert"
 import { useContext, useState } from "react"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ArrowBack, BackHand } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 const Recipes = () => {
 
 
   const { recipe, _ } = useContext(RecipeContext)
-
+  const navigate = useNavigate()
   const [porciones, setPorciones] = useState(1)
 
   return (
@@ -22,6 +24,18 @@ const Recipes = () => {
         overflowY: 'auto'
       }}
     >
+      <Box
+        display={'flex'}
+        color={'black'}
+        paddingLeft={'14px'}
+        alignItems={'center'}
+      >
+        <IconButton size="small" onClick={() => navigate('/')}>
+          <ArrowBack color="primary" fontSize="small" />
+        </IconButton>
+
+        <Typography variant="body2">Retroceder</Typography>
+      </Box>
       {recipe.label ? <>
 
 

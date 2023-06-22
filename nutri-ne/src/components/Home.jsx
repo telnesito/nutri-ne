@@ -3,7 +3,8 @@ import { useState, useContext } from 'react'
 import useFecth from '../customHooks/useFecth'
 import Loading from './Loading'
 import { RecipeContext } from '../context/RecipeContexProvidert'
-import { AccountCircle, Search } from '@mui/icons-material'
+import { Search } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -12,6 +13,7 @@ const Home = () => {
 
 
   const [busqueda, setBusqueda] = useState('')
+  const navigate = useNavigate()
   const { _, setRecipe } = useContext(RecipeContext)
 
   const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${busqueda}&app_id=65a5d4c3&app_key=256f9f1b299cddd6880c5d42d477ecac`
@@ -34,6 +36,7 @@ const Home = () => {
   }
 
   const showIngredients = (recipe) => {
+    navigate('recipes')
     setRecipe(recipe)
   }
 
@@ -79,6 +82,7 @@ const Home = () => {
 
 
           <TextField
+            autoComplete='off'
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">

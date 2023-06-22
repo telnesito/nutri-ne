@@ -1,6 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/Home";
 import { RecipeContextProvider } from "../context/RecipeContexProvidert";
+import Recipes from "../components/Recipes";
+import { Typography } from "@mui/material";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -8,5 +10,15 @@ export const router = createBrowserRouter([
       <RecipeContextProvider>
         <Home />
       </RecipeContextProvider>,
+    children: [
+      {
+        path: 'recipes',
+        element: <Recipes />
+      },
+      {
+        path: '',
+        element: <Typography color={'black'}>Info importante</Typography>
+      }
+    ]
   },
 ]);
