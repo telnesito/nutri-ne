@@ -295,7 +295,7 @@ const Recipes = () => {
 
                   <Typography
                     fontSize={'12px'}
-                  >{quantity + " " + measure} </Typography>
+                  >{quantity.toFixed(1) + " " + measure} </Typography>
                 </Box>
 
               </CardContent>
