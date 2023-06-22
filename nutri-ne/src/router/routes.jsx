@@ -3,6 +3,7 @@ import Home from "../pages/Home";
 import { RecipeContextProvider } from "../context/RecipeContexProvidert";
 import Recipes from "../components/Recipes";
 import { Typography } from "@mui/material";
+import NutritionGuide from "../components/NutritionGuide";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '',
-        element: <Typography color={'black'}>Info importante</Typography>
+        element: <NutritionGuide />
       }
     ]
   },
