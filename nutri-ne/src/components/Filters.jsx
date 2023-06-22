@@ -63,7 +63,6 @@ const Filters = () => {
           variant="standard" />
 
         <Typography
-          onCha
           variant="body2"
           fontWeight={'700'}
 
@@ -71,12 +70,12 @@ const Filters = () => {
         >Rango de cantidad de ingredientes</Typography>
 
         <TextField
-
+          onChange={({ target }) => setFilter({ maxIngredients: target.value })}
           autoComplete={'off'}
           helperText={'El rango se ingresa de la siguiente forma min-max, p.e: 2-4'}
           fullWidth
           placeholder="Ingresar rango..."
-          type="number"
+          type="text"
           variant="standard" />
 
         <Typography

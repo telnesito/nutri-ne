@@ -22,10 +22,13 @@ const Home = () => {
     let urlBase = `https://api.edamam.com/api/recipes/v2?type=public&q=${busqueda}&app_id=65a5d4c3&app_key=256f9f1b299cddd6880c5d42d477ecac`
     if (filter.maxCalories) {
       urlBase += `&calories=${filter.maxCalories}`
+      console.log(filter.maxCalories)
+
     }
 
     if (filter.maxIngredients) {
       urlBase += `&ingr=${filter.maxIngredients}`
+      console.log(filter.maxIngredients)
     }
 
     console.log(urlBase)
