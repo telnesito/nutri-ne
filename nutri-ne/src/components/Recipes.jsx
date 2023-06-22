@@ -19,6 +19,7 @@ const Recipes = () => {
       display={'flex'}
       flexDirection={'column'}
       gap={'10px'}
+      data-aos="fade-left"
 
       sx={{
         overflowY: 'auto'

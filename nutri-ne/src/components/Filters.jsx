@@ -14,6 +14,8 @@ const Filters = () => {
 
   return (
     <Box
+      data-aos="fade-right"
+
       width={'25vw'}
       paddingTop={'20px'}
       height={'100vh'}

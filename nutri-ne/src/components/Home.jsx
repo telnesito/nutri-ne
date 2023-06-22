@@ -1,12 +1,13 @@
 import { Box, Button, InputAdornment, Paper, TextField, Typography } from '@mui/material'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import useFecth from '../customHooks/useFecth'
 import Loading from './Loading'
 import { RecipeContext } from '../context/RecipeContexProvidert'
 import { Search } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { FilterContext } from '../context/FilterContextProvider'
-
+import Aos from 'aos'
+import 'aos/dist/aos.css';
 
 const Home = () => {
 
@@ -16,6 +17,12 @@ const Home = () => {
   const navigate = useNavigate()
   const { _, setRecipe } = useContext(RecipeContext)
   const { filter, setFilter } = useContext(FilterContext)
+
+  useEffect(() => {
+    Aos.init({ duration: 1000 })
+
+  }, [])
+
 
 
   const createUrl = () => {
@@ -78,6 +85,7 @@ const Home = () => {
     >
 
       <Box
+
         component={'form'}
         onSubmit={onSubmit}
         display={'flex'}
@@ -140,6 +148,9 @@ const Home = () => {
           width={'70%'}
           minWidth={'450px'}
           height={'auto'}
+
+
+
         >
           {
             data && !isEmpty ? data.hits.map(({ recipe: { label, image, healthLabels, yield: recipeYield, calories, totalNutrients, mealType, ingredients, digest, dietLabels, cautions, url } }, index) => <Paper
@@ -173,11 +184,13 @@ const Home = () => {
                   height={'90%'}
                 >
                   <img
+
                     loading='lazy'
 
                     height={'120px'} width={'120px'} src={image}></img>
                 </Box>
                 <Box
+
                   width={'60%'}
                   minWidth={'200px'}
                   display={'flex'}
@@ -300,7 +313,7 @@ const Home = () => {
               </Box>
 
             </Paper>)
-              : <img src='/img/look.svg'></img>
+              : <img data-aos="fade-up" src='/img/look.svg'></img>
           }
         </Box>
         <Loading isLoading={isLoading} />
