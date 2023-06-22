@@ -36,8 +36,8 @@ const Home = () => {
     }
 
     if (filter.dietas) {
-      filter.alergias.forEach(alergia => {
-        urlBase += `&diet=${alergia.toLowerCase()}`
+      filter.dietas.forEach(dietas => {
+        urlBase += `&diet=${dietas.toLowerCase()}`
       });
     }
     console.log(urlBase)

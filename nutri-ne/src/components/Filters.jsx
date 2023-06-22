@@ -11,7 +11,6 @@ const Filters = () => {
 
   const { filter, setFilter } = useContext(FilterContext)
 
-  console.log(filter)
 
   return (
     <Box
