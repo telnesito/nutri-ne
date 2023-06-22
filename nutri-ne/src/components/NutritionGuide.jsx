@@ -184,7 +184,6 @@ const NutritionGuide = () => {
     }
   ];
 
-  console.log(data);
 
   return (
     <Box

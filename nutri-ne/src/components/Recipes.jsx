@@ -2,7 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Card, CardContent, 
 import { RecipeContext } from "../context/RecipeContexProvidert"
 import { useContext, useState } from "react"
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { ArrowBack, BackHand } from "@mui/icons-material";
+import { ArrowBack } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 const Recipes = () => {
 

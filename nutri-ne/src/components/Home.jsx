@@ -29,6 +29,17 @@ const Home = () => {
       urlBase += `&ingr=${filter.maxIngredients}`
     }
 
+    if (filter.alergias) {
+      filter.alergias.forEach(alergia => {
+        urlBase += `&health=${alergia.toLowerCase()}`
+      });
+    }
+
+    if (filter.dietas) {
+      filter.alergias.forEach(alergia => {
+        urlBase += `&diet=${alergia.toLowerCase()}`
+      });
+    }
     console.log(urlBase)
     return urlBase
   }

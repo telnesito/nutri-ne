@@ -4,22 +4,14 @@ import { FilterContext } from "../context/FilterContextProvider"
 import { useContext } from "react"
 const Filters = () => {
 
-  const alergias = ["Gluten", "Pez", "Lácteos", "Mariscos", "Trigo", "Soja", "Huevos", "Nueces"]
-  const dietas = ["Vegetariano",
-    "Vegano",
-    "Paleo",
-    "Alto-fibra",
-    "Alto-proteina",
-    "Bajo-carbo",
-    "Bajo-grasas",
-    "Bajo-sodio",
-    "Bajo-azúcar",
-    "Sin alcohol",
-    "Balanceada",
-    "Inmunidad"]
+  const alergias = ["alcohol-free", "celery-free", "crustacean-free", "dairy-free", "DASH", "egg-free", "fish-free", "fodmap-free", "gluten-free", "immuno-supportive", "kidney-friendly", "kosher", "low-fat-abs", "low-potassium", "low-sugar", "lupine-free", "Mediterranean", "mollusk-free", "mustard-free", "no-oil-added", "paleo", "peanut-free", "pescatarian", "pork-free", "red-meat-free", "sesame-free", "shellfish-free", "soy-free", "sugar-conscious", "sulfite-free", "vegan", "vegetarian", "wheat-free"]
+
+  const dietas = ["balanced", "high-fiber", "high-protein", "low-carb", "low-fat", "low-sodium"]
+
 
   const { filter, setFilter } = useContext(FilterContext)
 
+  console.log(filter)
 
   return (
     <Box
@@ -82,13 +74,24 @@ const Filters = () => {
           fontWeight={'700'}
 
           color={'black'}
-        >Alergias</Typography>
+        >Salud</Typography>
         <Box
           display={'flex'}
           flexWrap={'wrap'}
         >
           {
-            alergias.map((alergia, index) => <FormControlLabel key={index} sx={{ color: 'black', width: '100px', height: '40px' }} control={<Checkbox size="small" />} label={alergia} />)
+            alergias.map((alergia, index) => <FormControlLabel key={index} sx={{ color: 'black', width: '170px', height: '40px' }} control={<Checkbox
+              onChange={({ target }) => {
+                const updatedAlergias = new Set(filter.alergias);
+                if (target.checked) {
+                  updatedAlergias.add(alergia);
+                } else {
+                  updatedAlergias.delete(alergia);
+                }
+                setFilter({ ...filter, alergias: Array.from(updatedAlergias) });
+              }}
+              size="small"
+            />} label={alergia} />)
           }
 
         </Box>
@@ -104,7 +107,17 @@ const Filters = () => {
           flexWrap={'wrap'}
         >
           {
-            dietas.map((alergia, index) => <FormControlLabel key={index} sx={{ color: 'black', width: '160px', height: '40px' }} control={<Checkbox size="small" />} label={alergia} />)
+            dietas.map((dietas, index) => <FormControlLabel key={index} sx={{ color: 'black', width: '160px', height: '40px' }} control={<Checkbox
+              onChange={({ target }) => {
+                const updateDietas = new Set(filter.dietas);
+                if (target.checked) {
+                  updateDietas.add(dietas);
+                } else {
+                  updateDietas.delete(dietas);
+                }
+                setFilter({ ...filter, dietas: Array.from(updateDietas) });
+              }}
+              size="small" />} label={dietas} />)
           }
 
         </Box>
