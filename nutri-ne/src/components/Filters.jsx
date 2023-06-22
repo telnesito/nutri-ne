@@ -1,5 +1,7 @@
 import { Box, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material"
 import { useState } from "react"
+import { FilterContext } from "../context/FilterContextProvider"
+import { useContext } from "react"
 const Filters = () => {
 
   const alergias = ["Gluten", "Pez", "Lácteos", "Mariscos", "Trigo", "Soja", "Huevos", "Nueces"]
@@ -16,10 +18,9 @@ const Filters = () => {
     "Balanceada",
     "Inmunidad"]
 
-  const [maxCalories, setMaxCalories] = useState(null)
+  const { filter, setFilter } = useContext(FilterContext)
 
-  console.log(maxCalories)
-
+  console.log(filter)
 
   return (
     <Box
@@ -52,7 +53,7 @@ const Filters = () => {
 
         <TextField
 
-          onChange={({ target }) => setMaxCalories(target.value)}
+          onChange={({ target }) => setFilter({ maxCalories: target.value })}
 
           autoComplete={'off'}
 
@@ -62,6 +63,7 @@ const Filters = () => {
           variant="standard" />
 
         <Typography
+          onCha
           variant="body2"
           fontWeight={'700'}
 
@@ -69,6 +71,7 @@ const Filters = () => {
         >Rango de cantidad de ingredientes</Typography>
 
         <TextField
+
           autoComplete={'off'}
           helperText={'El rango se ingresa de la siguiente forma min-max, p.e: 2-4'}
           fullWidth
