@@ -15,15 +15,32 @@ const Home = () => {
 
   const [busqueda, setBusqueda] = useState('')
   const navigate = useNavigate()
-  const { _, setRecipe } = useContext(RecipeContext)
+  const { recipe, setRecipe } = useContext(RecipeContext)
   const { filter, setFilter } = useContext(FilterContext)
+
+
+  const selectFirst = "es-ES"
+  const selectSecond = "en-US"
+
+  const getTranslation = async (text) => {
+    if (!text) return
+    try {
+      const res = await fetch(`https://api.mymemory.translated.net/get?q=${text}&langpair=${selectFirst}|${selectSecond}`)
+      const data = await res.json()
+      console.log(data)
+      const translated = data.responseData.translatedText
+      return translated
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
 
   useEffect(() => {
     Aos.init({ duration: 1000 })
 
   }, [])
-
-
 
   const createUrl = () => {
     let urlBase = `https://api.edamam.com/api/recipes/v2?type=public&q=${busqueda}&app_id=65a5d4c3&app_key=256f9f1b299cddd6880c5d42d477ecac`
@@ -50,16 +67,14 @@ const Home = () => {
     console.log(urlBase)
     return urlBase
   }
-
   const { data, isLoading, error, fetchData, isEmpty } = useFecth(createUrl())
+
 
   const onSubmit = async (e) => {
 
     e.preventDefault()
     try {
-
       await fetchData()
-
       if (error) {
         throw new Error(error)
       }
@@ -71,6 +86,12 @@ const Home = () => {
   const showIngredients = (recipe) => {
     navigate('recipes')
     setRecipe(recipe)
+  }
+
+  const handleChange = async ({ target }) => {
+    const result = await getTranslation(target.value)
+    console.log(result)
+    setBusqueda(result)
   }
 
   return (
@@ -97,7 +118,10 @@ const Home = () => {
         padding={'20px'}
         sx={{
           overflowY: 'auto',
-          overflowX: 'hidden'
+          overflowX: 'hidden',
+          width: {
+            xl: '40vw', lg: '40vw', md: '80vw', sm: '90vw', xs: '95vw'
+          },
         }}
 
 
@@ -131,7 +155,7 @@ const Home = () => {
               minWidth: '450px'
 
             }}
-            onChange={({ target }) => setBusqueda(target.value)}
+            onChange={handleChange}
 
             label='Ingrese ingredientes' focused placeholder='¿Qué comeremos hoy?' type='search' variant='filled' />
 
