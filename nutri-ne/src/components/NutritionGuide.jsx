@@ -187,16 +187,19 @@ const NutritionGuide = () => {
 
   return (
     <Box
-      width={'25vw'}
       paddingTop={'20px'}
       height={'100vh'}
       display={'flex'}
       flexDirection={'column'}
       gap={'10px'}
+
       data-aos="fade-left"
 
       sx={{
-        overflowY: 'auto'
+        overflowY: 'auto',
+        width: {
+          xl: '25vw', lg: '25vw', md: '80vw', sm: '90vw', xs: '95vw'
+        },
       }}
     >
 

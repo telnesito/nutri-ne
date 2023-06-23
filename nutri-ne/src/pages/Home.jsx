@@ -7,10 +7,13 @@ const Home = () => {
   return (
     <Box
       width={'100vw'}
-
+      alignItems={'center'}
       bgcolor={'white'}
       justifyContent={'center'}
       display={'flex'}
+      sx={{
+        flexDirection: { xl: 'row', lg: 'row', md: 'column', sm: 'column', xs: 'column' }
+      }}
     >
 
       <Filters />

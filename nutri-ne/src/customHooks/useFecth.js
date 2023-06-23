@@ -7,6 +7,24 @@ const useFecth = (url) => {
   const [error, setError] = useState(null)
   const [isEmpty, setIsEmpty] = useState(false)
 
+
+  const selectFirst = "es-ES"
+  const selectSecond = "en-US"
+
+  const getTranslation = async (text) => {
+    if (!text) return
+    try {
+      const res = await fetch(`https://api.mymemory.translated.net/get?q=${text}&langpair=${selectFirst}|${selectSecond}`)
+      const data = await res.json()
+      console.log(data)
+      const translated = data.responseData.translatedText
+      return translated
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   const fetchData = async () => {
     setIsLoading(true)
 
